@@ -1,0 +1,87 @@
+// Types for the mock hotel booking API (hotels / rooms / bookings)
+
+export type Currency = "USD" | "EUR" | "GBP" | "SAR" | "AED";
+
+export type Amenity =
+  | "pool"
+  | "wifi"
+  | "breakfast"
+  | "spa"
+  | "gym"
+  | "parking"
+  | "airport_shuttle"
+  | "sauna"
+  | "bar"
+  | "restaurant"
+  | "room_service"
+  | "pet_friendly"
+  | "business_center"
+  | "beach_access";
+
+export type BedType = "King" | "Queen" | "Twin" | "Double";
+
+export type BookingStatus =
+  | "confirmed"
+  | "pending"
+  | "cancelled"
+  | "checked_in"
+  | "checked_out"
+  | "no_show";
+
+export type PaymentMethod =
+  | "credit_card"
+  | "paypal"
+  | "bank_transfer"
+  | "apple_pay";
+
+export interface Hotel {
+  id: number;
+  name: string;
+  city: string;
+  country: string;
+  starRating: number; // 1-5
+  pricePerNight: number;
+  currency: Currency;
+  amenities: Amenity[];
+  thumbnailUrl: string;
+  images: string[]; // gallery photos, independent of thumbnailUrl
+  address: string;
+  phone: string;
+  description: string;
+}
+
+export interface Room {
+  id: number;
+  hotelId: number; // FK -> Hotel.id
+  type: string; // e.g. "Standard Double", "Royal Suite"
+  capacity: number;
+  price: number;
+  available: boolean;
+  floor: number;
+  bedType: BedType;
+  images: string[];
+}
+
+export interface Booking {
+  id: string; // e.g. "bk_1001"
+  hotelId: number; // FK -> Hotel.id
+  roomId: number; // FK -> Room.id
+  guestName: string;
+  guestEmail: string;
+  checkIn: string; // ISO date, e.g. "2026-08-10"
+  checkOut: string; // ISO date
+  guests: number;
+  status: BookingStatus;
+  totalPrice: number;
+  currency: Currency;
+  paymentMethod: PaymentMethod;
+  createdAt: string; // ISO datetime
+  specialRequests: string; // may be empty string
+}
+
+// Convenience type if you ever need a hotel with its rooms/bookings nested
+// (json-server itself returns them as flat collections, not nested)
+export interface HotelWithDetails extends Hotel {
+  rooms: Room[];
+  bookings: Booking[];
+}
