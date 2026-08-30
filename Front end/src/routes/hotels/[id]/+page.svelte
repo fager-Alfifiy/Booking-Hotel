@@ -62,13 +62,13 @@
 		}
 	}
 	
-if (id) {
-    const hotelId = Number(id);
-
-        getHotel(hotelId);
-        getRooms(hotelId);
-    };
-
+$effect(() => {
+	const id = $page.parameter.id;
+	if (id) {
+		getHotel(id);
+		getRooms(id);
+	}
+});
 	
 </script>
 

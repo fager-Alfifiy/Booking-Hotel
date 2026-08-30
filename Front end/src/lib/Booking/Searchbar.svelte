@@ -96,11 +96,6 @@
 			</div>
 		</div>
 		
-		<button
-			class="bg-[#728156] text-white rounded-lg px-5 py-3 hover:bg-[#5f6d47] transition h-[46px]"
-			onclick={search}
-		>
-			Search
-		</button>
+
 	</div>
 </div>
