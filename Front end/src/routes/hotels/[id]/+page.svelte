@@ -63,7 +63,7 @@
 	}
 	
 $effect(() => {
-	const id = $page.parameter.id;
+	const id = $page.params.id;
 	if (id) {
 		getHotel(id);
 		getRooms(id);

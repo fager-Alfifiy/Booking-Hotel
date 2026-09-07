@@ -1,17 +1,15 @@
-
 <script>
 	import { booking } from "$lib/stores/booking";
 
-	let payment = "Visa";
+let payment = "";
 
 	function updatePayment(value) {
-		payment = value;
-
-		booking.update((current) => ({
-			...current,
-			payment
-		}));
-	}
+	payment = value;
+	booking.update((current) => ({
+		...current,
+		paymentMethod: payment
+	}));
+}
 </script>
 
 <div class="bg-white rounded-xl shadow p-6">

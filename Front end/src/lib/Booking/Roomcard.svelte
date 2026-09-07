@@ -1,19 +1,18 @@
 
 <script>
-import { goto } from "$app/navigation";
+	import { goto } from "$app/navigation";
 	import { booking } from "$lib/stores/booking";
 	let { room, hotel } = $props();
 
 	function reserve() {
-		booking.update((current) => ({
-			...current,
-			hotel,
-			room
-		}));
+		if (!room.available) return;
+
+		booking.addItem(hotel, room);
 
 		goto("/booking");
 	}
 </script>
+
 <div class="bg-white rounded-xl shadow p-5">
 	<h2 class="text-xl font-bold mb-2">
 		{room.type} Room
@@ -36,8 +35,10 @@ import { goto } from "$app/navigation";
 
 	<button
 		onclick={reserve}
-
-		class="mt-4 w-full bg-[#728156] text-white py-2 rounded-lg hover:opacity-90"
-	>Select Room
+		disabled={!room.available}
+		class="mt-4 w-full text-white py-2 rounded-lg transition {room.available
+			? 'bg-[#728156] hover:opacity-90'
+			: 'bg-gray-300 cursor-not-allowed'}"
+	>{room.available ? 'Select Room' : 'Not Available'}
 	</button>
 </div>

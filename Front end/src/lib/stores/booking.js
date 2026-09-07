@@ -1,9 +1,9 @@
 import { writable } from "svelte/store";
 
 function createBookingStore() {
+
 	const { subscribe, set, update } = writable({
-		hotel: null,
-		room: null,
+		items: [],
 		guests: 1,
 		checkIn: "",
 		checkOut: "",
@@ -15,13 +15,27 @@ function createBookingStore() {
 		subscribe,
 		set,
 		update,
-		remove: () =>
+		addItem: (hotel, room) =>
+			update((current) => {
+				// avoid adding the exact same room twice
+				const alreadyIn = current.items.some((i) => i.room.id === room.id);
+				if (alreadyIn) return current;
+
+				return {
+					...current,
+					items: [...current.items, { id: Date.now() + Math.random(), hotel, room }]
+				};
+			}),
+		removeItem: (itemId) =>
 			update((current) => ({
 				...current,
-				hotel: null,
-				room: null
+				items: current.items.filter((i) => i.id !== itemId)
+			})),
+		clearCart: () =>
+			update((current) => ({
+				...current,
+				items: []
 			}))
 	};
 }
-
 export const booking = createBookingStore();

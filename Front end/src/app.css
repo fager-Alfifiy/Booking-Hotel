@@ -11,3 +11,16 @@
 	font-family: 'Almarai';
 	src: url('/fonts/Almarai.ttf') format('truetype');
 }
+button:not(:disabled),
+a,
+select,
+input[type="radio"],
+input[type="checkbox"],
+input[type="range"],
+[role="button"] {
+	cursor: pointer;
+}
+
+button:disabled {
+	cursor: not-allowed;
+} 
