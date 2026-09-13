@@ -5,7 +5,7 @@
 	import Pricesummary from "$lib/Booking/Pricesummary.svelte";
 	import Payment from "$lib/Booking/Payment.svelte";
 
-	const taxRate = 0.10;
+	const taxRate = 0.15;
 
 	function confirmBooking() {
 		if (!$booking.paymentMethod) return;
@@ -43,7 +43,6 @@
 			console.error(e);
 		}
 
-		
 		booking.update((current) => ({
 			...current,
 			items: [],

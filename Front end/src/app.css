@@ -1,7 +1,4 @@
 @import "tailwindcss";
-
-@custom-variant dark (&:where(.dark, .dark *));
-
 @font-face {
 	font-family: 'Ayah';
 	src: url('/fonts/Ayah.ttf') format('truetype');
