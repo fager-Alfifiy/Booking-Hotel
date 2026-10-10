@@ -1,7 +1,7 @@
 <script>
 	import { booking } from "$lib/stores/booking";
 
-let payment = $state("");
+let payment = "";
 
 	function updatePayment(value) {
 	payment = value;

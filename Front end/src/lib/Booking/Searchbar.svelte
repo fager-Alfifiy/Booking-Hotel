@@ -1,8 +1,8 @@
 <script>
 	import { filters } from "$lib/stores/filters";
 	import { goto } from "$app/navigation";
-let checkIn = $state("");
-let checkOut = $state("");
+let checkIn = "";
+let checkOut ="";
 
 
 	function search() {
